@@ -42,10 +42,10 @@ public struct TOTP {
 
 	/// Initialise time-based one time password object
 	/// - parameter secret: Secret key data
-	/// - parameter digits: Number of digits for generated string in range 6...8, defaults to 6
+	/// - parameter digits: Number of digits for generated string in range 4...8, defaults to 4
 	/// - parameter algorithm: The hashing algorithm to use of type OTPAlgorithm, defaults to SHA-1
-	/// - precondition: digits *must* be between 6 and 8 inclusive
-	public init?(secret: Data, digits: Int = 6, timeInterval: Int = 30, algorithm: OTPAlgorithm = .sha1) {
+	/// - precondition: digits *must* be between 4 and 8 inclusive
+	public init?(secret: Data, digits: Int = 4, timeInterval: Int = 30, algorithm: OTPAlgorithm = .sha1) {
 		self.secret = secret
 		self.digits = digits
 		self.timeInterval = timeInterval
@@ -72,10 +72,10 @@ public struct TOTP {
 		return Generator.shared.generateOTP(secret: secret, algorithm: algorithm, counter: UInt64(counterValue), digits: digits)
 	}
 
-	/// Check to see if digits value provided is in the range 6...8 (specified in RFC 4226)
+	/// Check to see if digits value provided is in the range 4...8 (specified in RFC 4226)
 	/// - parameter digit: Number of digits for generated string
 	private func validateDigits(digit: Int) -> Bool{
-		let validDigits = 6...8
+		let validDigits = 4...8
 		return validDigits.contains(digit)
 	}
 
